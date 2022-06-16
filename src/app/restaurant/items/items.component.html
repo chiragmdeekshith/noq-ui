@@ -1,1 +1,28 @@
-<p>items works!</p>
+<div *ngIf="restaurantDetail != undefined">
+    <mat-toolbar color="accent">
+        <span>{{ restaurantDetail.restaurantName }}</span>
+    </mat-toolbar>
+    <mat-grid-list cols="2" rowHeight="1:1" [gutterSize]="'5px'">
+        <mat-grid-tile *ngFor="let item of restaurantDetail.items">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>{{ item.name }}</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <img mat-card-lg-image src="https://material.angular.io/assets/img/examples/shiba2.jpg">
+                    <br />
+                    <span>Rs. {{ item.price }}</span>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button (click)="onClickMinus(item.itemId)" mat-mini-fab color="accent">
+                        -
+                    </button>
+                    <span> Quantity </span>
+                    <button (click)="onClickPlus(item.itemId)" mat-mini-fab color="accent">
+                        +
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>

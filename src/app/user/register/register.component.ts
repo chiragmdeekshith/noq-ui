@@ -12,24 +12,24 @@ import { RegisterResponse } from './model/register-response.model';
 })
 export class RegisterComponent implements OnInit {
 
-  registerForm: FormGroup;
-  registerRequest!: RegisterRequest;
-  registerResponse!: RegisterResponse;
+  private registerRequest!: RegisterRequest;
+  private registerResponse!: RegisterResponse;
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService) { 
+  public registerForm!: FormGroup;
+
+  constructor(private formBuilder: FormBuilder, private userService: UserService) { }
+
+  ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
       fullName: ['', [Validators.required]],
       phone: ['', [Validators.required]],
       emailId: ['', [Validators.required]],
       password: ['', [Validators.required]],
-      confirmPassword: ['', []]
+      confirmPassword: ['', [Validators.required]]
     });
   }
 
-  ngOnInit(): void {
-  }
-
-  onClickRegister() {
+  public onClickRegister() {
     console.log(this.registerForm.value);
 
     this.registerRequest = new RegisterRequest();
@@ -38,7 +38,7 @@ export class RegisterComponent implements OnInit {
     this.registerRequest.emailId = this.registerForm.value.emailId;
     this.registerRequest.password = this.registerForm.value.password;
 
-    this.userService.registerService(this.registerRequest).subscribe(registerResponse => {
+    this.userService.register(this.registerRequest).subscribe(registerResponse => {
       this.registerResponse = registerResponse;
       console.log(this.registerResponse);
     });

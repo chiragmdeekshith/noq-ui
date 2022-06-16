@@ -11,26 +11,26 @@ import { UserService } from '../user.service';
 })
 export class LoginComponent implements OnInit {
 
-  loginForm: FormGroup;
-  loginRequest!: LoginRequest;
-  loginResponse!: LoginResponse;
+  private loginRequest!: LoginRequest;
+  private loginResponse!: LoginResponse;
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService) {
+  public loginForm!: FormGroup;
+
+  constructor(private formBuilder: FormBuilder, private userService: UserService) { }  
+
+  ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
       emailId: ['', [Validators.required]],
       password: ['', [Validators.required]]
     });
-  }  
-
-  ngOnInit(): void {
   }
 
-  onClickLogin() {
+  public onClickLogin() {
     this.loginRequest = new LoginRequest();
     this.loginRequest.emailId = this.loginForm.value.emailId;
     this.loginRequest.password = this.loginForm.value.password;
 
-    this.userService.loginService(this.loginRequest).subscribe(loginResponse =>{
+    this.userService.login(this.loginRequest).subscribe(loginResponse =>{
       this.loginResponse = loginResponse;
       console.log(this.loginResponse);
     });

@@ -33,7 +33,7 @@
                 </div>
                 <div class="col-md-6">
                     <mat-form-field class="full-width">
-                        <input formControlName="password" matInput type="password" placeholder="password">
+                        <input formControlName="password" matInput type="password" placeholder="Password">
                         <mat-hint style="color: red;"
                             *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.errors">
                             Password is required
@@ -42,9 +42,9 @@
                 </div>
                 <div class="col-md-6">
                     <mat-form-field class="full-width">
-                        <input formControlName="confirmPassword" matInput type="password" placeholder="confirmPassword">
+                        <input formControlName="confirmPassword" matInput type="password" placeholder="Confirm Password">
                         <mat-hint style="color: red;"
-                            *ngIf="registerForm.get('confirmPassword') != registerForm.get('confirmPassword')">
+                            *ngIf="registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.errors">
                             Confirm password must match password
                         </mat-hint>
                     </mat-form-field>
