@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LoginRequest } from '../model/login-request.model';
+import { LoginRequest } from './model/login-request.model';
+import { LoginResponse } from './model/login-response.model';
 import { UserService } from '../user.service';
 
 @Component({
@@ -11,27 +12,27 @@ import { UserService } from '../user.service';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
-  loginRequest: LoginRequest;
+  loginRequest!: LoginRequest;
+  loginResponse!: LoginResponse;
 
   constructor(private formBuilder: FormBuilder, private userService: UserService) {
     this.loginForm = this.formBuilder.group({
-      emailId: ['', Validators.required],
-      password: ['', Validators.required]
-    });;
-    this.loginRequest = new LoginRequest();
+      emailId: ['', [Validators.required]],
+      password: ['', [Validators.required]]
+    });
   }  
 
   ngOnInit(): void {
   }
 
   onClickLogin() {
-    console.log(this.loginForm.value);
+    this.loginRequest = new LoginRequest();
     this.loginRequest.emailId = this.loginForm.value.emailId;
     this.loginRequest.password = this.loginForm.value.password;
 
     this.userService.loginService(this.loginRequest).subscribe(loginResponse =>{
-      console.log(loginResponse);
+      this.loginResponse = loginResponse;
+      console.log(this.loginResponse);
     });
   }
-
 }

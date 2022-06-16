@@ -2,7 +2,7 @@ export class LoginRequest {
     emailId: string;
     password: string;
 
-    constructor(){
+    constructor() {
         this.emailId = "";
         this.password = "";
     }

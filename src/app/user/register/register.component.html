@@ -1,1 +1,58 @@
-<p>Register component</p>
+<form [formGroup]="registerForm" class="form-container">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Register to NoQ</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="row">
+                <div class="col-md-6">
+                    <mat-form-field class="full-width">
+                        <input formControlName="fullName" matInput type="text" placeholder="Full Name">
+                        <mat-hint style="color: red;"
+                            *ngIf="registerForm.get('fullName')?.touched && registerForm.get('fullName')?.errors">
+                            Full Name is required
+                        </mat-hint>
+                    </mat-form-field>
+                </div><div class="col-md-6">
+                    <mat-form-field class="full-width">
+                        <input formControlName="phone" matInput type="text" placeholder="Phone number">
+                        <mat-hint style="color: red;"
+                            *ngIf="registerForm.get('phone')?.touched && registerForm.get('phone')?.errors">
+                            Phone number is required
+                        </mat-hint>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field class="full-width">
+                        <input formControlName="emailId" matInput type="text" placeholder="Email ID">
+                        <mat-hint style="color: red;"
+                            *ngIf="registerForm.get('emailId')?.touched && registerForm.get('emailId')?.errors">
+                            Email ID is required
+                        </mat-hint>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field class="full-width">
+                        <input formControlName="password" matInput type="password" placeholder="password">
+                        <mat-hint style="color: red;"
+                            *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.errors">
+                            Password is required
+                        </mat-hint>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field class="full-width">
+                        <input formControlName="confirmPassword" matInput type="password" placeholder="confirmPassword">
+                        <mat-hint style="color: red;"
+                            *ngIf="registerForm.get('confirmPassword') != registerForm.get('confirmPassword')">
+                            Confirm password must match password
+                        </mat-hint>
+                    </mat-form-field>
+                </div>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <button (click)="onClickRegister()" mat-raised-button color="primary">Register</button>
+        </mat-card-actions>
+    </mat-card>
+</form>
