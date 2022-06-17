@@ -1,6 +1,7 @@
 export interface RestaurantListResponse {
     restaurantId: number;
     name: string;
+    imageUrl: string;
 }
 
 export interface RestaurantDetailResponse {
@@ -14,5 +15,6 @@ interface Item{
     restaurantId: number;
     name: string;
     price: number;
+    imageUrl: string;
 }
     
