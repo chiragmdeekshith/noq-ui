@@ -10,7 +10,7 @@ export interface RestaurantDetailResponse {
     items: Item[];
 }
 
-interface Item{
+interface Item {
     itemId: number;
     restaurantId: number;
     name: string;

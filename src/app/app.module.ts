@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserModule } from './user/user.module';
 import { MaterialModule } from './material/material.module';
 import { RestaurantModule } from './restaurant/restaurant.module';
+import { OrderModule } from './order/order.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { RestaurantModule } from './restaurant/restaurant.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     UserModule,
-    RestaurantModule
+    RestaurantModule,
+    OrderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

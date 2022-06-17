@@ -5,7 +5,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list'; 
-import {MatToolbarModule} from '@angular/material/toolbar'; 
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTableModule } from '@angular/material/table'; 
 
 const MaterialComponents = [
   MatInputModule,
@@ -14,7 +15,8 @@ const MaterialComponents = [
   MatSelectModule, 
   MatButtonModule,
   MatGridListModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatTableModule
 ];
 
 @NgModule({

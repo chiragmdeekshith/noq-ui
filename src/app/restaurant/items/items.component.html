@@ -17,8 +17,8 @@
                     <button (click)="onClickMinus(item.itemId)" mat-mini-fab color="accent">
                         -
                     </button>
-                    <span> Quantity </span>
-                    <button (click)="onClickPlus(item.itemId)" mat-mini-fab color="accent">
+                    <span> In Cart: {{ getQuantity(item.itemId) }} </span>
+                    <button (click)="onClickPlus(item.itemId, item.name, item.price, restaurantDetail.restaurantName)" mat-mini-fab color="accent">
                         +
                     </button>
                 </mat-card-actions>
