@@ -1,35 +1,49 @@
-<table mat-table [dataSource]="cartItems" class="mat-elevation-z8">
+<div>
+    <table mat-table [dataSource]="cartItems" class="mat-elevation-z8">
 
-    <!-- Restaurant Name Column -->
-    <ng-container matColumnDef="restaurantName">
-        <th mat-header-cell *matHeaderCellDef> Restaurant Name </th>
-        <td mat-cell *matCellDef="let cartItem"> {{ cartItem.restaurantName }} </td>
-    </ng-container>
+        <!-- Restaurant Name Column -->
+        <ng-container matColumnDef="restaurantName">
+            <th mat-header-cell *matHeaderCellDef> Restaurant Name </th>
+            <td mat-cell *matCellDef="let cartItem"> {{ cartItem.restaurantName }} </td>
+        </ng-container>
 
-    <!-- Item Name Column -->
-    <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Item Name </th>
-        <td mat-cell *matCellDef="let cartItem"> {{ cartItem.name }} </td>
-    </ng-container>
+        <!-- Item Name Column -->
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Item Name </th>
+            <td mat-cell *matCellDef="let cartItem"> {{ cartItem.name }} </td>
+        </ng-container>
 
-    <!-- Price Column -->
-    <ng-container matColumnDef="price">
-        <th mat-header-cell *matHeaderCellDef> Price </th>
-        <td mat-cell *matCellDef="let cartItem"> {{ cartItem.price }} </td>
-    </ng-container>
+        <!-- Price Column -->
+        <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef> Price </th>
+            <td mat-cell *matCellDef="let cartItem"> {{ cartItem.price }} </td>
+        </ng-container>
 
-    <!-- Quantity Column -->
-    <ng-container matColumnDef="quantity">
-        <th mat-header-cell *matHeaderCellDef> Quantity </th>
-        <td mat-cell *matCellDef="let cartItem"> x {{ cartItem.quantity }} </td>
-    </ng-container>
+        <!-- Quantity Column -->
+        <ng-container matColumnDef="quantity">
+            <th mat-header-cell *matHeaderCellDef> Quantity </th>
+            <td mat-cell *matCellDef="let cartItem"> 
+                <button (click)="onClickMinus(cartItem.itemId)" mat-mini-fab color="warn">
+                    -
+                </button>
+                {{ cartItem.quantity }}
+                <button (click)="onClickPlus(cartItem.itemId)" mat-mini-fab color="warn">
+                    +
+                </button>
+            </td>
+        </ng-container>
 
-    <!-- Total Price Column -->
-    <ng-container matColumnDef="totalPrice">
-        <th mat-header-cell *matHeaderCellDef> Total Price </th>
-        <td mat-cell *matCellDef="let cartItem"> {{ cartItem.price * cartItem.quantity }} </td>
-    </ng-container>
+        <!-- Total Price Column -->
+        <ng-container matColumnDef="totalPrice">
+            <th mat-header-cell *matHeaderCellDef> Total Price </th>
+            <td mat-cell *matCellDef="let cartItem"> {{ cartItem.price * cartItem.quantity }} </td>
+        </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <br/>
+    <span>Total Price: {{ calculateTotalPrice() }}</span>
+    <br/>
+    <button mat-raised-button color="primary" (click)="payAndPlaceOrder()"> Pay and Place Order</button>
+</div>
