@@ -1,1 +1,47 @@
-<p>status works!</p>
+<div *ngIf="orderResponse != undefined">
+    <mat-card>
+        <mat-card-header>
+            <span>Order ID : {{ orderId }}
+            </span>
+        </mat-card-header>
+        <mat-card-content>
+            <div>
+                <span>Status : {{ orderResponse.status }}</span>
+            </div>
+            <div>
+                <span>Items:</span>
+                <table>
+                    <thead>
+                        <tr>
+                            <th><span>Restaurant Name</span></th>
+                            <th><span>Item Name</span></th>
+                            <th><span>Quantity</span> </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let orderItem of orderItems">
+                            <td><span>{{ orderItem.restaurantName }}</span></td>
+                            <td><span>{{ orderItem.name }}</span></td>
+                            <td><span>{{ orderItem.quantity }}</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+
+            <div *ngIf="isReadyForPickup()">
+                <button mat-raised-button color="primary" (click)="onClickPickUp()">
+                    <span>Pick Up</span>
+                </button>
+            </div>
+            <br />
+            <div *ngIf="isCancellable()">
+                <button mat-raised-button color="warn" (click)="onClickCancel()">
+                    <span>Cancel</span>
+                </button>
+            </div>
+
+        </mat-card-actions>
+    </mat-card>
+</div>

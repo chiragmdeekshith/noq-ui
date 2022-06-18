@@ -16,7 +16,8 @@ import { MaterialModule } from '../material/material.module';
     MaterialModule
   ],
   exports: [
-    CartComponent
+    CartComponent,
+    StatusComponent
   ]
 })
 export class OrderModule { }

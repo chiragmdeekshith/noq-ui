@@ -3,5 +3,9 @@ export const AppConstant = {
     LOGIN_API: '/v1/user/login',
     REGISTER_API: '/v1/user/register',
     RESTAURANT_LIST_API: '/v1/restaurants',
-    RESTAURANT_DETAIL_API: '/v1/restaurant/'
+    RESTAURANT_DETAIL_API: '/v1/restaurant/',
+    NEW_ORDER_API: '/v1/order/newOrder',
+    ORDER_DETAIL_API: '/v1/order/detail/',
+    ORDER_STATUS_API: '/v1/order/getStatus/',
+    ORDER_STATUS_UPDATE_API: '/v1/order/setStatus'
 }

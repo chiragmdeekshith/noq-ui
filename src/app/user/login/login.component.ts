@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
     this.userService.login(this.loginRequest).subscribe(loginResponse =>{
       this.loginResponse = loginResponse;
       console.log(this.loginResponse);
+      localStorage.setItem("userEmailId", this.loginResponse.emailId);
     });
   }
 }
