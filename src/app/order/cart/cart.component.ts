@@ -36,6 +36,7 @@ export class CartComponent implements OnInit {
     }
     this.orderService.newOrder(orderRequest).subscribe(orderResponse => {
       console.log(orderResponse);
+      localStorage.setItem("orderItems", JSON.stringify(this.cartItems));
       this.cartItems = [];
       localStorage.setItem("cartItems", JSON.stringify(this.cartItems));
     });

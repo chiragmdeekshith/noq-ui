@@ -7,6 +7,11 @@ export interface OrderResponse {
     orderItems : OrderItem[];
 }
 
+export interface OrderStatusResponse {
+    orderId: number;
+    status: string;
+}
+
 interface OrderItem {
     orderItemId: number;
     orderId: number;

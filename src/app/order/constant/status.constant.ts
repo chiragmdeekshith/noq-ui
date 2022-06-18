@@ -1,0 +1,6 @@
+export const StatusConstant = {
+    IN_PROGRESS : 'IN_PROGRESS',
+    READY_FOR_PICKUP : 'READY_FOR_PICKUP',
+    COMPLETED : 'COMPLETED',
+    CANCELLED : 'CANCELLED'
+}
