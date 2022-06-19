@@ -1,6 +1,6 @@
 export class OrderRequest {
     userEmailId!: string;
-    orderItems!: OrderItem[];
+    orderItemRequests!: OrderItemRequest[];
 }
 
 export class OrderStatusRequest {
@@ -8,7 +8,7 @@ export class OrderStatusRequest {
     status!: string;
 }
 
-interface OrderItem {
+interface OrderItemRequest {
     itemId: number;
     quantity: number;
 }

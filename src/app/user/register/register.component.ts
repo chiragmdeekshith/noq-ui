@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { RegisterConstant } from '../constant/register.constant';
 import { UserService } from '../user.service';
 import { RegisterRequest } from './model/register-request.model';
 import { RegisterResponse } from './model/register-response.model';
@@ -17,7 +19,7 @@ export class RegisterComponent implements OnInit {
 
   public registerForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService) { }
+  constructor(private router: Router, private formBuilder: FormBuilder, private userService: UserService) { }
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
@@ -40,7 +42,13 @@ export class RegisterComponent implements OnInit {
 
     this.userService.register(this.registerRequest).subscribe(registerResponse => {
       this.registerResponse = registerResponse;
-      console.log(this.registerResponse);
+      if (RegisterConstant.REGISTRATION_SUCCESSFUL != registerResponse.message) {
+        console.log(this.registerResponse.message);
+      }
+      else {
+        console.log("Navigating to login");
+        this.router.navigate(['/login']);
+      }
     });
   }
 

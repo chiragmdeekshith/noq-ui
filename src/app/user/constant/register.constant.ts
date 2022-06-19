@@ -1,0 +1,3 @@
+export const RegisterConstant = {
+    REGISTRATION_SUCCESSFUL : 'REGISTRATION_SUCCESSFUL'
+}

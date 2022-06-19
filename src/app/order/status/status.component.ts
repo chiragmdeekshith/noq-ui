@@ -15,12 +15,10 @@ export class StatusComponent implements OnInit {
 
   orderId!: number;
   orderResponse!: OrderResponse;
-  orderItems!: CartItem[];
 
   constructor(private route: ActivatedRoute, private orderService: OrderService) { }
 
   ngOnInit(): void {
-    this.orderItems = JSON.parse(localStorage.getItem("orderItems")!);
     this.route.paramMap.subscribe(params => {
       this.orderId = Number(params.get('orderId'));
       this.orderService.getOrderDetail(this.orderId).subscribe(orderResponse => {
@@ -50,7 +48,6 @@ export class StatusComponent implements OnInit {
     orderStatusRequest.status = StatusConstant.COMPLETED;
     this.orderService.updateOrderStatus(orderStatusRequest).subscribe(orderStatusResponse => {
       this.orderResponse.status = orderStatusResponse.status;
-      localStorage.setItem("orderItems", "[]");
       console.log('Order ' + orderStatusResponse.orderId + ' picked up');
     });
   }
@@ -61,7 +58,6 @@ export class StatusComponent implements OnInit {
     orderStatusRequest.status = StatusConstant.CANCELLED;
     this.orderService.updateOrderStatus(orderStatusRequest).subscribe(orderStatusResponse => {
       this.orderResponse.status = orderStatusResponse.status;
-      localStorage.setItem("orderItems", "[]");
       console.log('Order ' + orderStatusResponse.orderId + ' cancelled');
     });
   }

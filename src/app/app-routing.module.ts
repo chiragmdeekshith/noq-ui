@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'restaurant/:restaurantId', component: ItemsComponent },
   { path: 'cart', component: CartComponent },
   { path: 'orders', component: OrdersComponent },
-  { path: 'order/:orderId', component: StatusComponent },
+  { path: 'order/status/:orderId', component: StatusComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 

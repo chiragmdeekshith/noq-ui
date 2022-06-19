@@ -1,7 +1,7 @@
 <div *ngIf="orderResponse != undefined">
     <mat-card>
         <mat-card-header>
-            <span>Order ID : {{ orderId }}
+            <span>Order ID : {{ orderResponse.orderId }}
             </span>
         </mat-card-header>
         <mat-card-content>
@@ -19,12 +19,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let orderItem of orderItems">
-                            <td><span>{{ orderItem.restaurantName }}</span></td>
-                            <td><span>{{ orderItem.name }}</span></td>
-                            <td><span>{{ orderItem.quantity }}</span></td>
+                        <tr *ngFor="let orderItemResponse of orderResponse.orderItemResponses">
+                            <td><span>{{ orderItemResponse.restaurantName }}</span></td>
+                            <td><span>{{ orderItemResponse.itemName }}</span></td>
+                            <td><span>{{ orderItemResponse.quantity }}</span></td>
                         </tr>
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Total Price Paid</th>
+                            <td>{{ orderResponse.totalPrice }}</td>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </mat-card-content>
