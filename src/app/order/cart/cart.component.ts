@@ -25,24 +25,32 @@ export class CartComponent implements OnInit {
   }
 
   public payAndPlaceOrder() {
-    let orderRequest: OrderRequest = new OrderRequest();
-    orderRequest.userEmailId = localStorage.getItem("userEmailId")!;
-    orderRequest.orderItems = [];
+
+    let userEmailId: string = localStorage.getItem("userEmailId")!;
+    if (userEmailId == null || userEmailId == undefined || userEmailId == "" || userEmailId == "undefined" || userEmailId == "null") {
+      console.log("Navigating to login");
+      this.router.navigate(['/login']);
+    }
+
+    else {
+      let orderRequest: OrderRequest = new OrderRequest();
+    orderRequest.userEmailId = userEmailId;
+    orderRequest.orderItemRequests = [];
     for (let cartItem of this.cartItems) {
-      orderRequest.orderItems.push({
+      orderRequest.orderItemRequests.push({
         itemId: cartItem.itemId,
         quantity: cartItem.quantity
       });
     }
     this.orderService.newOrder(orderRequest).subscribe(orderResponse => {
       console.log(orderResponse);
-      localStorage.setItem("orderItems", JSON.stringify(this.cartItems));
       this.cartItems = [];
       localStorage.setItem("cartItems", JSON.stringify(this.cartItems));
 
       console.log("Navigating to order " + orderResponse.orderId);
-      this.router.navigate(['/order/' + orderResponse.orderId]);
+      this.router.navigate(['/order/status/' + orderResponse.orderId]);
     });
+    }
   }
 
   public calculateTotalPrice(): number {

@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginRequest } from './model/login-request.model';
 import { LoginResponse } from './model/login-response.model';
 import { UserService } from '../user.service';
+import { Router } from '@angular/router';
+import { LoginConstant } from '../constant/login.constant';
 
 @Component({
   selector: 'user-login',
@@ -16,7 +18,7 @@ export class LoginComponent implements OnInit {
 
   public loginForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService) { }  
+  constructor(private router: Router, private formBuilder: FormBuilder, private userService: UserService) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -30,10 +32,21 @@ export class LoginComponent implements OnInit {
     this.loginRequest.emailId = this.loginForm.value.emailId;
     this.loginRequest.password = this.loginForm.value.password;
 
-    this.userService.login(this.loginRequest).subscribe(loginResponse =>{
+    this.userService.login(this.loginRequest).subscribe(loginResponse => {
       this.loginResponse = loginResponse;
-      console.log(this.loginResponse);
-      localStorage.setItem("userEmailId", this.loginResponse.emailId);
+      if (LoginConstant.LOGIN_SUCCESSFUL != this.loginResponse.message) {
+        console.log(this.loginResponse.message);
+      }
+      else {
+        localStorage.setItem("userEmailId", this.loginResponse.emailId);
+        console.log("Navigating to cart");
+        this.router.navigate(['/cart']);
+      }
     });
+  }
+
+  public onClickSignUp() {
+    console.log("Navigating to register");
+    this.router.navigate(['/register']);
   }
 }

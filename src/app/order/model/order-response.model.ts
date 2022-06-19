@@ -4,7 +4,7 @@ export interface OrderResponse {
     totalPrice: number;
     status: string;
     message: string;
-    orderItems : OrderItem[];
+    orderItemResponses : OrderItemResponse[];
 }
 
 export interface OrderStatusResponse {
@@ -12,9 +12,13 @@ export interface OrderStatusResponse {
     status: string;
 }
 
-interface OrderItem {
+interface OrderItemResponse {
     orderItemId: number;
-    orderId: number;
     itemId: number;
+    itemName: string;
+    restaurantId: number;
+    restaurantName: string;
     quantity: number;
+    itemPrice: number;
+    totalPrice: number;
 }
