@@ -2,7 +2,7 @@
     <mat-toolbar color="accent">
         <span>{{ restaurantDetail.restaurantName }}</span>
     </mat-toolbar>
-    <mat-grid-list cols="2" rowHeight="1:1" [gutterSize]="'5px'">
+    <mat-grid-list cols="4" rowHeight="1:1" [gutterSize]="'5px'">
         <mat-grid-tile *ngFor="let item of restaurantDetail.items">
             <mat-card>
                 <mat-card-header>

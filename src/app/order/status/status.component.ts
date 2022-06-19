@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { StatusConstant } from '../constant/status.constant';
 import { CartItem } from '../model/cart-item.model';
 import { OrderStatusRequest } from '../model/order-request.model';
@@ -12,18 +13,20 @@ import { OrderService } from '../order.service';
 })
 export class StatusComponent implements OnInit {
 
-  @Input()
   orderId!: number;
   orderResponse!: OrderResponse;
   orderItems!: CartItem[];
 
-  constructor(private orderService: OrderService) { }
+  constructor(private route: ActivatedRoute, private orderService: OrderService) { }
 
   ngOnInit(): void {
     this.orderItems = JSON.parse(localStorage.getItem("orderItems")!);
-    this.orderService.getOrderDetail(this.orderId).subscribe(orderResponse => {
-      this.orderResponse = orderResponse;
-      this.startMonitoringOrderStatus();
+    this.route.paramMap.subscribe(params => {
+      this.orderId = Number(params.get('orderId'));
+      this.orderService.getOrderDetail(this.orderId).subscribe(orderResponse => {
+        this.orderResponse = orderResponse;
+        this.startMonitoringOrderStatus();
+      });
     });
   }
 
@@ -35,7 +38,7 @@ export class StatusComponent implements OnInit {
   }
 
   public isCancellable(): boolean {
-    if(this.orderResponse.status == StatusConstant.IN_PROGRESS){
+    if (this.orderResponse.status == StatusConstant.IN_PROGRESS) {
       return true;
     }
     return false;

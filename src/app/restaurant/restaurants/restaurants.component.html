@@ -1,12 +1,14 @@
-<mat-grid-list cols="3" rowHeight="1:1" [gutterSize]="'5px'">
+<mat-grid-list cols="4" rowHeight="1:1" [gutterSize]="'5px'">
     <mat-grid-tile *ngFor="let restaurant of restaurants">
         <mat-card>
-            <mat-card-header>
-                <mat-card-title>{{ restaurant.name }}</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-                <img mat-card-lg-image src="{{ restaurant.imageUrl }}"/>
-            </mat-card-content>
+            <div (click)="onClickRestaurant(restaurant.restaurantId)">
+                <mat-card-header>
+                    <mat-card-title>{{ restaurant.name }}</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <img mat-card-lg-image src="{{ restaurant.imageUrl }}"/>
+                </mat-card-content>
+            </div>
         </mat-card>
     </mat-grid-tile>
 </mat-grid-list>

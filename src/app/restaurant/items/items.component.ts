@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { RestaurantService } from '../restaurant.service';
 import { RestaurantDetailResponse } from '../model/restaurant-response.model';
 import { CartItem } from '../../order/model/cart-item.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'restaurant-detail',
@@ -10,19 +11,23 @@ import { CartItem } from '../../order/model/cart-item.model';
 })
 export class ItemsComponent implements OnInit {
 
-  @Input()
   restaurantId!: number;
   restaurantDetail!: RestaurantDetailResponse;
   cartItems!: CartItem[];
 
-  constructor(private restaurantService: RestaurantService) { }
+  constructor(private route: ActivatedRoute, private restaurantService: RestaurantService) { }
 
   ngOnInit(): void {
+
     const cartItemsTest = localStorage.getItem("cartItems");
     this.cartItems = cartItemsTest !== null && cartItemsTest !== undefined && cartItemsTest !== "undefined" ?
       JSON.parse(cartItemsTest) : [];
     localStorage.setItem("cartItems", JSON.stringify(this.cartItems));
-    this.getRestaurantDetail(this.restaurantId);
+
+    this.route.paramMap.subscribe(params =>{
+      this.restaurantId = Number(params.get('restaurantId'))
+      this.getRestaurantDetail(this.restaurantId);
+    });
   }
 
   private getRestaurantDetail(restaurantId: number) {

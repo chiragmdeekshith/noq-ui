@@ -5,9 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserModule } from './user/user.module';
-import { MaterialModule } from './material/material.module';
 import { RestaurantModule } from './restaurant/restaurant.module';
 import { OrderModule } from './order/order.module';
+import { NoQCommonModule } from './noq-common/noq-common.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,8 @@ import { OrderModule } from './order/order.module';
     BrowserAnimationsModule,
     UserModule,
     RestaurantModule,
-    OrderModule
+    OrderModule,
+    NoQCommonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
