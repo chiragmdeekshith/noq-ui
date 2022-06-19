@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CartItem } from '../model/cart-item.model';
 import { OrderRequest } from '../model/order-request.model';
-import { OrderResponse } from '../model/order-response.model';
 import { OrderService } from '../order.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class CartComponent implements OnInit {
   totalPrice!: number;
   displayedColumns: string[] = ['restaurantName', 'name', 'price', 'quantity', 'totalPrice'];
 
-  constructor(private orderService: OrderService) { }
+  constructor(private router: Router, private orderService: OrderService) { }
 
   ngOnInit(): void {
     const cartItemsTest = localStorage.getItem("cartItems");
@@ -39,6 +39,9 @@ export class CartComponent implements OnInit {
       localStorage.setItem("orderItems", JSON.stringify(this.cartItems));
       this.cartItems = [];
       localStorage.setItem("cartItems", JSON.stringify(this.cartItems));
+
+      console.log("Navigating to order " + orderResponse.orderId);
+      this.router.navigate(['/order/' + orderResponse.orderId]);
     });
   }
 
