@@ -1,1 +1,33 @@
-<p>orders works!</p>
+<cdk-accordion class="example-accordion">
+    <cdk-accordion-item *ngFor="let orderResponse of orderResponses; let index = index;"
+        #accordionItem="cdkAccordionItem" class="example-accordion-item" role="button" tabindex="0"
+        [attr.id]="'accordion-header-' + index" [attr.aria-expanded]="accordionItem.expanded"
+        [attr.aria-controls]="'accordion-body-' + index">
+        <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
+            <span>Order ID: {{ orderResponse.orderId }}</span>
+            <hr />
+            <span>Amount paid: {{ orderResponse.totalPrice }}</span>
+            <span class="example-accordion-item-description">
+                {{ accordionItem.expanded ? 'Close' : 'Open' }}
+            </span>
+        </div>
+        <div class="example-accordion-item-body" role="region" [style.display]="accordionItem.expanded ? '' : 'none'"
+            [attr.id]="'accordion-body-' + index" [attr.aria-labelledby]="'accordion-header-' + index">
+            <div (click)="onClickOrder(orderResponse.orderId)">
+                <div>
+                    <span><b>Order Status:</b></span>
+                </div>
+                <br />
+                <div><span>{{ orderResponse.status }}</span></div>
+                <br />
+                <div>
+                    <div><span><b>Restaurants:</b></span></div>
+                    <br />
+                    <div *ngFor="let restaurantName of getUniqueRestaurantsFromOrderResponse(orderResponse)">
+                        <span>{{ restaurantName }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </cdk-accordion-item>
+</cdk-accordion>

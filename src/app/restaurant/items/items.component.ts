@@ -3,6 +3,7 @@ import { RestaurantService } from '../restaurant.service';
 import { RestaurantDetailResponse } from '../model/restaurant-response.model';
 import { CartItem } from '../../order/model/cart-item.model';
 import { ActivatedRoute } from '@angular/router';
+import { AppConstant } from 'src/app/app.constant';
 
 @Component({
   selector: 'restaurant-detail',
@@ -19,10 +20,10 @@ export class ItemsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    const cartItemsTest = localStorage.getItem("cartItems");
+    const cartItemsTest = localStorage.getItem(AppConstant.LOCAL_STORAGE_CART_ITEMS);
     this.cartItems = cartItemsTest !== null && cartItemsTest !== undefined && cartItemsTest !== "undefined" ?
       JSON.parse(cartItemsTest) : [];
-    localStorage.setItem("cartItems", JSON.stringify(this.cartItems));
+    localStorage.setItem(AppConstant.LOCAL_STORAGE_CART_ITEMS, JSON.stringify(this.cartItems));
 
     this.route.paramMap.subscribe(params =>{
       this.restaurantId = Number(params.get('restaurantId'))
@@ -39,7 +40,7 @@ export class ItemsComponent implements OnInit {
 
   public onClickMinus(itemId: number) {
 
-    this.cartItems = JSON.parse(localStorage.getItem("cartItems")!);
+    this.cartItems = JSON.parse(localStorage.getItem(AppConstant.LOCAL_STORAGE_CART_ITEMS)!);
     let isRemoved: boolean = false;
     for (let cartItem of this.cartItems) {
       if (itemId == cartItem.itemId) {
@@ -58,13 +59,13 @@ export class ItemsComponent implements OnInit {
         return cartItem.itemId != itemId;
       });
     }
-    localStorage.setItem("cartItems", JSON.stringify(this.cartItems));
+    localStorage.setItem(AppConstant.LOCAL_STORAGE_CART_ITEMS, JSON.stringify(this.cartItems));
     console.log('Removed item ' + itemId);
   }
 
   public onClickPlus(itemId: number, itemName: string, itemPrice: number, restaurantName: string) {
 
-    this.cartItems = JSON.parse(localStorage.getItem("cartItems")!);
+    this.cartItems = JSON.parse(localStorage.getItem(AppConstant.LOCAL_STORAGE_CART_ITEMS)!);
     let isAdded: boolean = false;
     for (let cartItem of this.cartItems) {
       if (itemId == cartItem.itemId) {
@@ -83,7 +84,7 @@ export class ItemsComponent implements OnInit {
       }
       this.cartItems.push(cartItem);
     }
-    localStorage.setItem("cartItems", JSON.stringify(this.cartItems));
+    localStorage.setItem(AppConstant.LOCAL_STORAGE_CART_ITEMS, JSON.stringify(this.cartItems));
     console.log('Added item ' + itemId);
   }
 

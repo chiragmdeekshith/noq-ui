@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AppConstant } from 'src/app/app.constant';
 import { CartItem } from '../model/cart-item.model';
 import { OrderRequest } from '../model/order-request.model';
 import { OrderService } from '../order.service';
@@ -18,15 +19,15 @@ export class CartComponent implements OnInit {
   constructor(private router: Router, private orderService: OrderService) { }
 
   ngOnInit(): void {
-    const cartItemsTest = localStorage.getItem("cartItems");
+    const cartItemsTest = localStorage.getItem(AppConstant.LOCAL_STORAGE_CART_ITEMS);
     this.cartItems = cartItemsTest !== null && cartItemsTest !== undefined && cartItemsTest !== "undefined" ?
       JSON.parse(cartItemsTest) : [];
-    localStorage.setItem("cartItems", JSON.stringify(this.cartItems));
+    localStorage.setItem(AppConstant.LOCAL_STORAGE_CART_ITEMS, JSON.stringify(this.cartItems));
   }
 
   public payAndPlaceOrder() {
 
-    let userEmailId: string = localStorage.getItem("userEmailId")!;
+    let userEmailId: string = localStorage.getItem(AppConstant.LOCAL_STORAGE_USER_EMAIL_ID)!;
     if (userEmailId == null || userEmailId == undefined || userEmailId == "" || userEmailId == "undefined" || userEmailId == "null") {
       console.log("Navigating to login");
       this.router.navigate(['/login']);
@@ -45,7 +46,7 @@ export class CartComponent implements OnInit {
     this.orderService.newOrder(orderRequest).subscribe(orderResponse => {
       console.log(orderResponse);
       this.cartItems = [];
-      localStorage.setItem("cartItems", JSON.stringify(this.cartItems));
+      localStorage.setItem(AppConstant.LOCAL_STORAGE_CART_ITEMS, JSON.stringify(this.cartItems));
 
       console.log("Navigating to order " + orderResponse.orderId);
       this.router.navigate(['/order/status/' + orderResponse.orderId]);
@@ -62,20 +63,20 @@ export class CartComponent implements OnInit {
   }
 
   public onClickPlus(itemId: number) {
-    this.cartItems = JSON.parse(localStorage.getItem("cartItems")!);
+    this.cartItems = JSON.parse(localStorage.getItem(AppConstant.LOCAL_STORAGE_CART_ITEMS)!);
     for (let cartItem of this.cartItems) {
       if (itemId == cartItem.itemId) {
         cartItem.quantity += 1;
         break;
       }
     }
-    localStorage.setItem("cartItems", JSON.stringify(this.cartItems));
+    localStorage.setItem(AppConstant.LOCAL_STORAGE_CART_ITEMS, JSON.stringify(this.cartItems));
     console.log('Added item ' + itemId);
   }
 
   public onClickMinus(itemId: number) {
 
-    this.cartItems = JSON.parse(localStorage.getItem("cartItems")!);
+    this.cartItems = JSON.parse(localStorage.getItem(AppConstant.LOCAL_STORAGE_CART_ITEMS)!);
     let isRemoved: boolean = false;
     for (let cartItem of this.cartItems) {
       if (itemId == cartItem.itemId) {
@@ -94,7 +95,7 @@ export class CartComponent implements OnInit {
         return cartItem.itemId != itemId;
       });
     }
-    localStorage.setItem("cartItems", JSON.stringify(this.cartItems));
+    localStorage.setItem(AppConstant.LOCAL_STORAGE_CART_ITEMS, JSON.stringify(this.cartItems));
     console.log('Removed item ' + itemId);
   }
 

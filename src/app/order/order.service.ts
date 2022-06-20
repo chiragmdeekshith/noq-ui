@@ -32,4 +32,9 @@ export class OrderService {
     this.url = AppConstant.SERVER_URL + AppConstant.ORDER_STATUS_UPDATE_API;
     return this.httpClient.patch<OrderStatusResponse>(this.url, orderStatusRequest);
   }
+
+  public getOrdersByUser(userEmailId: string): Observable<OrderResponse[]> {
+    this.url = AppConstant.SERVER_URL + AppConstant.ORDERS_BY_USER_API + userEmailId;
+    return this.httpClient.get<OrderResponse[]>(this.url);
+  }
 }
