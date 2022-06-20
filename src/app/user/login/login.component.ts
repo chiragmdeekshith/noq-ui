@@ -5,6 +5,7 @@ import { LoginResponse } from './model/login-response.model';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 import { LoginConstant } from '../constant/login.constant';
+import { AppConstant } from 'src/app/app.constant';
 
 @Component({
   selector: 'user-login',
@@ -38,7 +39,7 @@ export class LoginComponent implements OnInit {
         console.log(this.loginResponse.message);
       }
       else {
-        localStorage.setItem("userEmailId", this.loginResponse.emailId);
+        localStorage.setItem(AppConstant.LOCAL_STORAGE_USER_EMAIL_ID, this.loginResponse.emailId);
         console.log("Navigating to cart");
         this.router.navigate(['/cart']);
       }

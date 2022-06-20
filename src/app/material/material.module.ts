@@ -6,7 +6,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list'; 
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatTableModule } from '@angular/material/table'; 
+import { MatTableModule } from '@angular/material/table';
+import { CdkAccordionModule } from '@angular/cdk/accordion';
 
 const MaterialComponents = [
   MatInputModule,
@@ -16,7 +17,8 @@ const MaterialComponents = [
   MatButtonModule,
   MatGridListModule,
   MatToolbarModule,
-  MatTableModule
+  MatTableModule,
+  CdkAccordionModule
 ];
 
 @NgModule({
