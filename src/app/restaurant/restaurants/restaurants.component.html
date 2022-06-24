@@ -1,4 +1,4 @@
-<mat-grid-list cols="4" rowHeight="1:1" [gutterSize]="'5px'">
+<!-- <mat-grid-list cols="4" rowHeight="1:1" [gutterSize]="'5px'">
     <mat-grid-tile *ngFor="let restaurant of restaurants">
         <mat-card>
             <div (click)="onClickRestaurant(restaurant.restaurantId)">
@@ -11,4 +11,16 @@
             </div>
         </mat-card>
     </mat-grid-tile>
-</mat-grid-list>
+</mat-grid-list> -->
+
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 m-6">
+    <article *ngFor="let restaurant of restaurants">
+
+        <div class="bg-slate-500 w-full p-2">
+            <figure class="mb-3">
+                <img src="{{ restaurant.imageUrl }}" alt="thumbnail" class="w-full overflow-hidden h-56" />
+            </figure>
+        </div>
+        
+    </article>
+</div>

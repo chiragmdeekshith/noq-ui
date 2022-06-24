@@ -1,0 +1,20 @@
+<nav class="relative w-full mx-auto py-0 px-6 shadow shadow-md sticky top-0 bg-white z-30">
+    <div class="flex items-center justify-between">
+        <div class="items-center space-x-5">
+            <button class="md:hidden" (click)="toggleToggleMenu()">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+
+        </div>
+        <a (click)="onClickLogo()" class="text-xl mr-auto ml-2 block">
+            <img src="https://www.ncass.org.uk/wp-content/uploads/2020/09/NOQ-LOGO-TRANSPARENT-LIGHT-STANDARD-2.png"
+                alt="" width="80" height="80">
+        </a>
+        <div class="flex items-center space-x-4">
+            <button (click)="onClickLogout()"
+                class="pt-2 pb-3 px-6 text-black bg-rose-500 rounded-full baseline hover:bg-rose-300 cursor-pointer text-sm">
+                Logout
+            </button>
+        </div>
+    </div>
+</nav>

@@ -39,9 +39,9 @@ export class LoginComponent implements OnInit {
         console.log(this.loginResponse.message);
       }
       else {
-        localStorage.setItem(AppConstant.LOCAL_STORAGE_USER_EMAIL_ID, this.loginResponse.emailId);
-        console.log("Navigating to cart");
-        this.router.navigate(['/cart']);
+        sessionStorage.setItem(AppConstant.SESSION_STORAGE_USER_EMAIL_ID, this.loginResponse.emailId);
+        console.log("Navigating to home");
+        this.router.navigate(['/home']);
       }
     });
   }

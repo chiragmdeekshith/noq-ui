@@ -27,7 +27,7 @@ export class CartComponent implements OnInit {
 
   public payAndPlaceOrder() {
 
-    let userEmailId: string = localStorage.getItem(AppConstant.LOCAL_STORAGE_USER_EMAIL_ID)!;
+    let userEmailId: string = sessionStorage.getItem(AppConstant.SESSION_STORAGE_USER_EMAIL_ID)!;
     if (userEmailId == null || userEmailId == undefined || userEmailId == "" || userEmailId == "undefined" || userEmailId == "null") {
       console.log("Navigating to login");
       this.router.navigate(['/login']);
@@ -97,6 +97,13 @@ export class CartComponent implements OnInit {
     }
     localStorage.setItem(AppConstant.LOCAL_STORAGE_CART_ITEMS, JSON.stringify(this.cartItems));
     console.log('Removed item ' + itemId);
+  }
+
+  public isCartEmpty(): boolean {
+    if(this.cartItems != null && this.cartItems != undefined) {
+      return this.cartItems.length == 0;
+    }
+    return false;
   }
 
 }

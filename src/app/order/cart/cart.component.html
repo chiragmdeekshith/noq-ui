@@ -45,5 +45,5 @@
     <br/>
     <span>Total Price: {{ calculateTotalPrice() }}</span>
     <br/>
-    <button mat-raised-button color="primary" (click)="payAndPlaceOrder()"> Pay and Place Order</button>
+    <button mat-raised-button color="primary" disabled="{{ isCartEmpty() }}" (click)="payAndPlaceOrder()"> Pay and Place Order</button>
 </div>

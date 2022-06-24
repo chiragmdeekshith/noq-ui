@@ -9,6 +9,6 @@ export const AppConstant = {
     ORDER_STATUS_API: '/v1/order/getStatus/',
     ORDER_STATUS_UPDATE_API: '/v1/order/setStatus',
     ORDERS_BY_USER_API: '/v1/orders/user/',
-    LOCAL_STORAGE_USER_EMAIL_ID: 'userEmailId',
+    SESSION_STORAGE_USER_EMAIL_ID: 'userEmailId',
     LOCAL_STORAGE_CART_ITEMS: 'cartItems'
 }

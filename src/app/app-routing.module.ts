@@ -10,7 +10,7 @@ import { LoginComponent } from './user/login/login.component';
 import { RegisterComponent } from './user/register/register.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/restaurants', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'home', redirectTo: '/restaurants', pathMatch: 'full' },
   { path: 'restaurants', component: RestaurantsComponent },
   { path: 'login', component: LoginComponent },
