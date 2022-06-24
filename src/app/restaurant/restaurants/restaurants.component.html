@@ -1,26 +1,15 @@
-<!-- <mat-grid-list cols="4" rowHeight="1:1" [gutterSize]="'5px'">
-    <mat-grid-tile *ngFor="let restaurant of restaurants">
-        <mat-card>
-            <div (click)="onClickRestaurant(restaurant.restaurantId)">
-                <mat-card-header>
-                    <mat-card-title>{{ restaurant.name }}</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                    <img mat-card-lg-image src="{{ restaurant.imageUrl }}"/>
-                </mat-card-content>
-            </div>
-        </mat-card>
-    </mat-grid-tile>
-</mat-grid-list> -->
-
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 m-6">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7 m-7">
     <article *ngFor="let restaurant of restaurants">
 
-        <div class="bg-slate-500 w-full p-2">
-            <figure class="mb-3">
-                <img src="{{ restaurant.imageUrl }}" alt="thumbnail" class="w-full overflow-hidden h-56" />
+        <div (click)="onClickRestaurant(restaurant.restaurantId)"
+            class="border-2 border-slate-300 shadow shadow-lg w-full p-2 hover:shadow-2xl hover:-translate-y-1 hover:cursor-pointer transition-all duration-200">
+            <figure class="">
+                <img src="{{ restaurant.imageUrl }}" alt="thumbnail" class=" w-full overflow-hidden h-56" />
             </figure>
+            <h2 class="text-center mt-3 font-semibold">
+                {{ restaurant.name }}
+            </h2>
         </div>
-        
+
     </article>
 </div>

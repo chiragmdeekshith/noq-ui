@@ -15,13 +15,19 @@ import { AppConstant } from 'src/app/app.constant';
 export class LoginComponent implements OnInit {
 
   private loginRequest!: LoginRequest;
-  private loginResponse!: LoginResponse;
+  public loginResponse!: LoginResponse;
 
   public loginForm!: FormGroup;
 
-  constructor(private router: Router, private formBuilder: FormBuilder, private userService: UserService) { }
+  public toastMessage!: string;
+
+  constructor(
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private userService: UserService) { }
 
   ngOnInit(): void {
+    this.toastMessage = "";
     this.loginForm = this.formBuilder.group({
       emailId: ['', [Validators.required]],
       password: ['', [Validators.required]]
@@ -37,6 +43,10 @@ export class LoginComponent implements OnInit {
       this.loginResponse = loginResponse;
       if (LoginConstant.LOGIN_SUCCESSFUL != this.loginResponse.message) {
         console.log(this.loginResponse.message);
+        switch (this.loginResponse.message) {
+          case LoginConstant.LOGIN_FAILED: this.toastMessage = "Email ID or password is incorrect."; break;
+          case LoginConstant.USER_NOT_FOUND: this.toastMessage = "Email ID is not registered."; break;
+        }
       }
       else {
         sessionStorage.setItem(AppConstant.SESSION_STORAGE_USER_EMAIL_ID, this.loginResponse.emailId);
