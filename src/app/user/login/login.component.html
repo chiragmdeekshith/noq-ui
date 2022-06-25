@@ -4,14 +4,14 @@
       Login to NoQ
     </h2>
     <div class="flex flex-col gap-4 border p-8 w-64 sm:w-max" [ngClass]="toastMessage != ''? 'border-rose-500': ''">
-      <input class="p-2 text-md border rounded-sm focus:outline outline-2 outline-blue-500" formControlName="emailId"
+      <input class="shadow shadow-md p-2 text-md border rounded-sm focus:outline outline-2 outline-blue-500" formControlName="emailId"
         type="text" placeholder="Email ID">
       <span class="text-rose-500 text-sm ml-2"
         *ngIf="loginForm.get('emailId')?.touched && loginForm.get('emailId')?.errors">
         Email ID is required
       </span>
 
-      <input class="p-2 text-md border rounded-sm focus:outline outline-2 outline-blue-500" formControlName="password"
+      <input class="shadow shadow-md p-2 text-md border rounded-sm focus:outline outline-2 outline-blue-500" formControlName="password"
         type="password" placeholder="Password">
       <span class="text-rose-500 text-sm ml-2"
         *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors">
