@@ -8,14 +8,14 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent {
   title = 'NoQ';
 
-  toggleStatusEvent:any;
-  userLoggedIn!: boolean;
+  toggleMenuStatusEvent: any;
 
-  constructor(){
+  constructor(){ }
+
+  public handleMenuToggleStatus(toggleMenuStatusEvent: Event){
+    this.toggleMenuStatusEvent = toggleMenuStatusEvent;
   }
 
-  public handleToggleStatus(toggleStatusEvent: Event){
-    this.toggleStatusEvent = toggleStatusEvent;
-  }
+
 }
 

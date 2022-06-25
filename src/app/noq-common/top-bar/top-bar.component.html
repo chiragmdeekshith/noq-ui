@@ -11,9 +11,15 @@
                 alt="" width="80" height="80">
         </a>
         <div class="flex items-center space-x-4">
-            <button (click)="onClickLogout()"
+            <button *ngIf="loginStatus"
+                (click)="onClickLogout()"
                 class="pt-2 pb-3 px-6 text-black bg-rose-500 rounded-full baseline hover:bg-rose-300 cursor-pointer text-sm">
                 Logout
+            </button>
+            <button *ngIf="!loginStatus"
+                (click)="onClickLogin()"
+                class="pt-2 pb-3 px-6 text-black bg-rose-500 rounded-full baseline hover:bg-rose-300 cursor-pointer text-sm">
+                Login
             </button>
         </div>
     </div>

@@ -1,10 +1,12 @@
 <div>
     <!-- Header row -->
-    <top-bar (eventEmitter)="handleToggleStatus($event)"></top-bar>
+    <top-bar 
+        (menuStatusEventEmitter)="handleMenuToggleStatus($event)"
+    ></top-bar>
 
     <!-- Content row -->
     <div class="flex flex-grow relative">
-        <navigation-bar [toggleMenuStatus]="toggleStatusEvent"></navigation-bar>
+        <navigation-bar [toggleMenuStatus]="toggleMenuStatusEvent"></navigation-bar>
         <div class="ml-16 md:ml-0 w-full overflow-y-scroll">
             <router-outlet></router-outlet>
         </div>

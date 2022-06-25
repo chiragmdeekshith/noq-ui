@@ -1,6 +1,8 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AppConstant } from 'src/app/app.constant';
+import { SharedService } from '../shared.service';
 
 @Component({
   selector: 'top-bar',
@@ -10,13 +12,25 @@ import { AppConstant } from 'src/app/app.constant';
 export class TopBarComponent implements OnInit {
 
   toggleMenuStatus!: boolean;
-  @Output() public eventEmitter = new EventEmitter<any>();
+  @Output() public menuStatusEventEmitter!: EventEmitter<any>;
+  loginStatusSub!: Subscription;
+  loginStatus! : boolean;
 
-
-  constructor(private router: Router) { }
+  constructor(private router: Router, private sharedService: SharedService) { 
+    this.menuStatusEventEmitter = new EventEmitter<boolean>();
+    this.toggleMenuStatus = false;
+  }
 
   ngOnInit(): void {
-    this.toggleMenuStatus = false;
+    this.loginStatusSub = this.sharedService.onClickLogin$.subscribe($event => {
+      this.loginStatus = $event;
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.loginStatusSub) {
+      this.loginStatusSub.unsubscribe();
+    }
   }
 
   public onClickLogin() {
@@ -27,6 +41,7 @@ export class TopBarComponent implements OnInit {
   public onClickLogout() {
     console.log("Logging out");
     sessionStorage.removeItem(AppConstant.SESSION_STORAGE_USER_EMAIL_ID);
+    this.loginStatus = false;
     this.router.navigate(['/home']);
   }
 
@@ -37,7 +52,7 @@ export class TopBarComponent implements OnInit {
 
   public toggleToggleMenu() {
     this.toggleMenuStatus = !this.toggleMenuStatus;
-    this.eventEmitter.emit(this.toggleMenuStatus);
+    this.menuStatusEventEmitter.emit(this.toggleMenuStatus);
   }
 
 }

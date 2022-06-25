@@ -3,7 +3,7 @@
     <h2 class="text-2xl font-semibold">
       Login to NoQ
     </h2>
-    <div class="flex flex-col gap-4 border p-8 w-64 sm:w-max">
+    <div class="flex flex-col gap-4 border p-8 w-64 sm:w-max" [ngClass]="toastMessage != ''? 'border-rose-500': ''">
       <input class="p-2 text-md border rounded-sm focus:outline outline-2 outline-blue-500" formControlName="emailId"
         type="text" placeholder="Email ID">
       <span class="text-rose-500 text-sm ml-2"
@@ -18,9 +18,10 @@
         Password is required
       </span>
 
-      <button (click)="onClickLogin()" [ngClass]="loginForm.get('password')?.errors || loginForm.get('emailId')?.errors ? 'disabled bg-slate-500' : 'transition-all duration-200 hover:cursor-pointer active:-translate-y-1 '" 
-      [disabled]="loginForm.get('password')?.errors || loginForm.get('emailId')?.errors" 
-      class="rounded-md px-6 py-2 text-xl bg-sky-700 text-white">
+      <button (click)="onClickLogin()" [ngClass]="loginForm.get('password')?.errors || loginForm.get('emailId')?.errors ?
+      'disabled bg-slate-500' : 'bg-sky-700 transition-all duration-200 hover:cursor-pointer active:-translate-y-1 '"
+        [disabled]="loginForm.get('password')?.errors || loginForm.get('emailId')?.errors"
+        class="rounded-md px-6 py-2 text-xl text-white">
         Login
       </button>
       <span class="text-rose-500 text-sm ml-2 text-center" *ngIf="toastMessage != ''">
