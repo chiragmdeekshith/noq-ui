@@ -1,11 +1,11 @@
-<cdk-accordion class="example-accordion">
+<!-- <cdk-accordion class="example-accordion">
     <cdk-accordion-item *ngFor="let orderResponse of orderResponses; let index = index;"
         #accordionItem="cdkAccordionItem" class="example-accordion-item" role="button" tabindex="0"
         [attr.id]="'accordion-header-' + index" [attr.aria-expanded]="accordionItem.expanded"
         [attr.aria-controls]="'accordion-body-' + index">
         <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
             <span>Order ID: {{ orderResponse.orderId }}</span>
-            <hr />
+            <hr/>
             <span>Amount paid: {{ orderResponse.totalPrice }}</span>
             <span class="example-accordion-item-description">
                 {{ accordionItem.expanded ? 'Close' : 'Open' }}
@@ -30,4 +30,56 @@
             </div>
         </div>
     </cdk-accordion-item>
-</cdk-accordion>
+</cdk-accordion> -->
+
+<div class="accordion w-full flex flex-col sm:w-[36rem] mx-auto md:mt-7" id="orderItems">
+    <div *ngFor="let orderResponse of orderResponses; let index = index"
+        class="accordion-item bg-white border border-gray-200">
+        <h2 class="accordion-header mb-0" [attr.id]="'heading' + index">
+            <button
+                class="accordion-button collapsed relative flex items-center w-full py-4 px-5 text-base text-gray-800 text-left bg-slate-200 border-0 rounded-none transition focus:outline-none"
+                type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + index" aria-expanded="true"
+                [attr.aria-controls]="'collapse' + index">
+                <h2 class="text-md mx-auto font-semibold ">
+                    Order ID -
+                    <span class="text-lg text-blue-500">
+                        {{ orderResponse.orderId }}
+                    </span>
+                </h2>
+            </button>
+        </h2>
+        <div [attr.id]="'collapse' + index" class="accordion-collapse collapse"
+            [attr.aria-labelledby]="'heading' + index" data-bs-parent="#orderItems">
+            <div class="accordion-body py-4 px-5">
+                <div class="flex flex-col items-center justify-center">
+                    <span class="font-semibold mb-2 text-md">
+                        Restaurants
+                    </span>
+                    <table class="table-auto space-y-1">
+                        <tr class="flex p-1 px-16 border border-2 border-slate-200 text-center"
+                            *ngFor="let restaurantName of getUniqueRestaurantsFromOrderResponse(orderResponse)">{{
+                            restaurantName }}
+                        </tr>
+                    </table>
+                    <!-- <div class=" p-3 flex flex-col">
+                        <span class="block p-1 px-16 border border-2 border-slate-200 text-center"
+                            *ngFor="let restaurantName of getUniqueRestaurantsFromOrderResponse(orderResponse)">{{
+                            restaurantName }}
+                        </span>
+                    </div> -->
+                    <span class="mt-5 font-semibold text-md">
+                        Grand Total
+                    </span>
+                    <span class="mt-2 font-black text-md text-red-700">
+                        Rs. {{ orderResponse.totalPrice }} /-
+                    </span>
+
+                </div>
+                <div class="mt-5 mb-5 flex justify-center">
+                    <a class="hover:cursor-pointer text-blue-500 underline"
+                        (click)="onClickOrderStatus(orderResponse.orderId)">View order status</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

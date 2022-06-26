@@ -1,10 +1,29 @@
-<mat-toolbar color="primary">
-    <span (click)="onClickLogo()">NoQ</span>
-    <hr />
-    <span (click)="onClickRestaurants()">Restaurants</span>
-    <hr />
-    <span (click)="onClickCart()">Cart</span>
-    <hr />
-    <span (click)="onClickOrders()">Orders</span>
-    <hr />
-</mat-toolbar>
+<div class="fixed z-10 top-20 md:top-0 h-full md:relative flex-initial">
+    <!-- Overlay -->
+    <div
+        [ngClass]="!toggleMenuStatus ? '' : 'z-10 fixed bottom-0 right-0 left-0 top-0 bg-black/50 w-full md:hidden h-screen'">
+    </div>
+
+    <!-- Sidebar -->
+    <div class="z-20 absolute bg-white border flex-initial
+    transition-width duration-1000 px-3 md:relative  md:w-48 bg-white bottom-0 left-0 top-0 ">
+        <a (click)="onClickRestaurants()"
+            class="flex items-center p-3 cursor-pointer hover:bg-sky-200 active:bg-blue-500 rounded-xl my-1">
+            <i class="fa-solid fa-utensils"></i>
+            <span [ngClass]="toggleMenuStatus ? 'inline' : 'hidden'"
+                class="md:text-xl text-md ml-3 md:inline">Restaurants</span>
+        </a>
+        <a (click)="onClickCart()"
+            class="flex items-center p-3 cursor-pointer hover:bg-sky-200 active:bg-blue-500 rounded-xl my-1">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span [ngClass]="toggleMenuStatus ? 'inline' : 'hidden'"
+                class="md:text-xl text-md ml-2 md:inline">Cart</span>
+        </a>
+        <a (click)="onClickOrders()"
+            class="flex items-center p-3 cursor-pointer hover:bg-sky-200 active:bg-blue-500 rounded-xl my-1">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            <span [ngClass]="toggleMenuStatus ? 'inline' : 'hidden'"
+                class="md:text-xl text-md ml-3 md:inline">Orders</span>
+        </a>
+    </div>
+</div>

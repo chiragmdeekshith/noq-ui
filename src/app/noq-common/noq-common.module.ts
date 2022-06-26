@@ -3,13 +3,15 @@ import { CommonModule } from '@angular/common';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { MaterialModule } from '../material/material.module';
+import { TopBarComponent } from './top-bar/top-bar.component';
 
 
 
 @NgModule({
   declarations: [
     PageNotFoundComponent,
-    NavigationBarComponent
+    NavigationBarComponent,
+    TopBarComponent
   ],
   imports: [
     CommonModule,
@@ -17,7 +19,8 @@ import { MaterialModule } from '../material/material.module';
   ],
   exports: [
     PageNotFoundComponent,
-    NavigationBarComponent
+    NavigationBarComponent,
+    TopBarComponent
   ]
 })
 export class NoQCommonModule { }

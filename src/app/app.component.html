@@ -1,2 +1,14 @@
-<navigation-bar></navigation-bar>
-<router-outlet></router-outlet>
+<div>
+    <!-- Header row -->
+    <top-bar 
+        (menuStatusEventEmitter)="handleMenuToggleStatus($event)"
+    ></top-bar>
+
+    <!-- Content row -->
+    <div class="flex flex-grow relative">
+        <navigation-bar [toggleMenuStatus]="toggleMenuStatusEvent"></navigation-bar>
+        <div class="ml-16 md:ml-0 w-full overflow-y-scroll">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

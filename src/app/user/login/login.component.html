@@ -1,32 +1,37 @@
-<form [formGroup]="loginForm" class="form-container">
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>Login to NoQ</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <div class="row">
-        <div class="col-md-6">
-          <mat-form-field class="full-width">
-            <input formControlName="emailId" matInput type="text" placeholder="Email ID">
-            <mat-hint style="color: red;" *ngIf="loginForm.get('emailId')?.touched && loginForm.get('emailId')?.errors">
-              Email ID is required
-            </mat-hint>
-          </mat-form-field>
-        </div>
-        <div class="col-md-6">
-          <mat-form-field class="full-width">
-            <input formControlName="password" matInput type="password" placeholder="Password">
-            <mat-hint style="color: red;"
-              *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors">
-              Password is required
-            </mat-hint>
-          </mat-form-field>
-        </div>
-      </div>
-    </mat-card-content>
-    <mat-card-actions>
-      <button (click)="onClickLogin()" mat-raised-button color="primary">Login</button>
-      <button (click)="onClickSignUp()" mat-raised-button color="secondary">Sign Up</button>
-    </mat-card-actions>
-  </mat-card>
+<form [formGroup]="loginForm" class="mt-5 mx-auto w-full min-h-64">
+  <div class="flex flex-col gap-2 items-center">
+    <h2 class="text-2xl font-semibold">
+      Login to NoQ
+    </h2>
+    <div class="flex flex-col gap-4 border p-8 w-64 sm:w-max" [ngClass]="toastMessage != ''? 'border-rose-500': ''">
+      <input class="shadow shadow-md p-2 text-md border rounded-sm focus:outline outline-2 outline-blue-500" formControlName="emailId"
+        type="text" placeholder="Email ID">
+      <span class="text-rose-500 text-sm ml-2"
+        *ngIf="loginForm.get('emailId')?.touched && loginForm.get('emailId')?.errors">
+        Email ID is required
+      </span>
+
+      <input class="shadow shadow-md p-2 text-md border rounded-sm focus:outline outline-2 outline-blue-500" formControlName="password"
+        type="password" placeholder="Password">
+      <span class="text-rose-500 text-sm ml-2"
+        *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors">
+        Password is required
+      </span>
+
+      <button (click)="onClickLogin()" [ngClass]="loginForm.get('password')?.errors || loginForm.get('emailId')?.errors ?
+      'disabled bg-slate-500' : 'bg-sky-700 transition-all duration-200 hover:cursor-pointer active:-translate-y-1 '"
+        [disabled]="loginForm.get('password')?.errors || loginForm.get('emailId')?.errors"
+        class="rounded-md px-6 py-2 text-xl text-white">
+        Login
+      </button>
+      <span class="text-rose-500 text-sm ml-2 text-center" *ngIf="toastMessage != ''">
+        {{ toastMessage }}
+      </span>
+      <span class="text-center text-sm sm:text-base">
+        Create an account?
+        <a class="ml-2 hover:cursor-pointer text-blue-500 underline" (click)="onClickSignUp()">Sign Up</a>
+      </span>
+    </div>
+
+  </div>
 </form>
