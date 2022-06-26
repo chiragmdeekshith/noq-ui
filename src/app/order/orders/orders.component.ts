@@ -34,7 +34,7 @@ export class OrdersComponent implements OnInit {
     return Array.from(restaurantNames.values());
   }
 
-  public onClickOrder(orderId: number) {
+  public onClickOrderStatus(orderId: number) {
     console.log("Routing to order status");
     this.router.navigate(['/order/status/' + orderId]);
   }
