@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { StatusConstant } from '../constant/status.constant';
-import { CartItem } from '../model/cart-item.model';
 import { OrderStatusRequest } from '../model/order-request.model';
 import { OrderResponse } from '../model/order-response.model';
 import { OrderService } from '../order.service';
@@ -15,8 +14,11 @@ export class StatusComponent implements OnInit {
 
   orderId!: number;
   orderResponse!: OrderResponse;
+  restaurants!: Set<string>;
 
-  constructor(private route: ActivatedRoute, private orderService: OrderService) { }
+  constructor(private route: ActivatedRoute, private orderService: OrderService) {
+    this.restaurants = new Set<string>;
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -60,6 +62,34 @@ export class StatusComponent implements OnInit {
       this.orderResponse.status = orderStatusResponse.status;
       console.log('Order ' + orderStatusResponse.orderId + ' cancelled');
     });
+  }
+
+  public getRestaurantNames(): string[] {
+    this.restaurants.clear();
+    for (let orderItemResponse of this.orderResponse.orderItemResponses) {
+      this.restaurants.add(orderItemResponse.restaurantName);
+    }
+    return Array.from(this.restaurants.values());
+  }
+
+  public getOrderStatusString(status: string): string {
+    switch(status) {
+      case StatusConstant.IN_PROGRESS: return "IN PROGRESS";
+      case StatusConstant.READY_FOR_PICKUP: return "READY FOR PICKUP";
+      case StatusConstant.CANCELLED: return "CANCELLED";
+      case StatusConstant.COMPLETED: return "COMPLETED";
+    }
+    return "UNKNOWN";
+  }
+
+  public getOrderStatusCss(status: string): string {
+    switch(status) {
+      case StatusConstant.IN_PROGRESS: return "bg-blue-500";
+      case StatusConstant.READY_FOR_PICKUP: return "bg-yellow-500";
+      case StatusConstant.CANCELLED: return "bg-rose-500";
+      case StatusConstant.COMPLETED: return "bg-green-500";
+    }
+    return "";
   }
 
   private startMonitoringOrderStatus() {

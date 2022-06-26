@@ -1,4 +1,4 @@
-<div *ngIf="orderResponse != undefined">
+<!-- <div *ngIf="orderResponse != undefined">
     <mat-card>
         <mat-card-header>
             <span>Order ID : {{ orderResponse.orderId }}
@@ -50,4 +50,75 @@
 
         </mat-card-actions>
     </mat-card>
+</div> -->
+
+<div *ngIf="orderResponse != undefined" class="ml-3 mt-5 mr-3">
+    <h2 class="text-center font-semibold text-lg">Order ID -
+        <span class="text-blue-500">{{ orderResponse.orderId }}</span>
+    </h2>
+
+    <div [ngClass]="getOrderStatusCss(orderResponse.status)"
+    class="p-6 gap-7 flex-col items-center border border-3 border-slate-300 w-full mt-4 flex justify-center rounded rounded-2xl shadow shadow-2xl">
+        <span class="text-white font-semibold text-lg">{{ getOrderStatusString(orderResponse.status) }}</span>
+
+        <!-- Spinner -->
+        <div *ngIf="orderResponse.status == 'IN_PROGRESS'" class="flex justify-center items-center space-x-2">
+            <div class="spinner-border animate-spin inline-block w-12 h-12 border-4 rounded-full text-white"
+                role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+
+        <div class="" *ngIf="orderResponse.status == 'COMPLETED'">
+            <i class="fa-solid fa-circle-check text-white text-5xl"></i>
+        </div>
+
+        <div class="" *ngIf="orderResponse.status == 'READY_FOR_PICKUP'">
+            <i class="fa-solid fa-circle-check text-white text-5xl"></i>
+        </div>
+
+        <div class="" *ngIf="orderResponse.status == 'CANCELLED'">
+            <i class="fa-solid fa-circle-xmark text-white text-5xl"></i>
+        </div>
+
+    </div>
+
+    <div class="flex items-center justify-center gap-2 mt-7">
+        <button class="px-5 py-2 bg-sky-700 focus:-translate-y-1 text-white rounded-md" *ngIf="isReadyForPickup()"
+            (click)="onClickPickUp()">
+            Pick Up
+        </button>
+
+        <button class="px-5 py-2 bg-rose-700 focus:-translate-y-1 text-white rounded-md" *ngIf="isCancellable()"
+            (click)="onClickCancel()">
+            Cancel
+        </button>
+    </div>
+
+
+    <ng-container *ngFor="let restaurant of getRestaurantNames()">
+
+        <h2 class="text-center font-semibold text-md mt-7 mb-2">
+            {{ restaurant }}
+        </h2>
+
+        <table class="mx-auto table-auto border border-2 border-slate-300 shadow shadow-md w-full sm:w-96">
+            <thead class="w-max">
+                <tr class="border ">
+                    <th class="border border-slate-300">Item Name</th>
+                    <th class="border border-slate-300">Quantity</th>
+                </tr>
+            </thead>
+
+            <tbody class="mt-3">
+                <ng-container *ngFor="let orderItemResponse of orderResponse.orderItemResponses">
+                    <tr *ngIf="orderItemResponse.restaurantName == restaurant">
+                        <td class="border border-slate-300 text-center w-max">{{ orderItemResponse.itemName }}</td>
+                        <td class="border border-slate-300 text-center w-max">{{ orderItemResponse.quantity }}</td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </ng-container>
+
 </div>
