@@ -1,7 +1,8 @@
-<nav class="relative w-full mx-auto py-0 px-6 shadow shadow-md sticky top-0 bg-white z-30">
+<nav class="relative w-full mx-auto py-0 px-6 shadow shadow-md sticky top-0 bg-slate-300 z-30">
     <div class="flex items-center justify-between">
         <div class="items-center space-x-5">
-            <button class="md:hidden" (click)="toggleToggleMenu()">
+            <button class="px-2 md:hidden active:text-blue-500 active:bg-blue-500 rounded-lg"
+                (click)="toggleToggleMenu()">
                 <i class="fa-solid fa-bars text-xl"></i>
             </button>
 
@@ -11,13 +12,11 @@
                 alt="" width="80" height="80">
         </a>
         <div class="flex items-center space-x-4">
-            <button *ngIf="loginStatus"
-                (click)="onClickLogout()"
+            <button *ngIf="loginStatus" (click)="onClickLogout()"
                 class="pt-2 pb-3 px-6 text-black bg-rose-500 rounded-full baseline hover:bg-rose-300 cursor-pointer text-sm">
                 Logout
             </button>
-            <button *ngIf="!loginStatus"
-                (click)="onClickLogin()"
+            <button *ngIf="!loginStatus" (click)="onClickLogin()"
                 class="pt-2 pb-3 px-6 text-black bg-rose-500 rounded-full baseline hover:bg-rose-300 cursor-pointer text-sm">
                 Login
             </button>
