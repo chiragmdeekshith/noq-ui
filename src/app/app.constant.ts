@@ -1,5 +1,7 @@
+import { environment } from '../environments/environment';
+
 export const AppConstant = {
-    SERVER_URL : 'http://localhost:8080',
+    SERVER_URL : environment.noqServiceUrl,
     LOGIN_API: '/v1/user/login',
     REGISTER_API: '/v1/user/register',
     RESTAURANT_LIST_API: '/v1/restaurants',

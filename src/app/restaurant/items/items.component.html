@@ -1,33 +1,3 @@
-<!-- <div *ngIf="restaurantDetail != undefined">
-    <mat-toolbar color="accent">
-        <span>{{ restaurantDetail.restaurantName }}</span>
-    </mat-toolbar>
-    <mat-grid-list cols="4" rowHeight="1:1" [gutterSize]="'5px'">
-        <mat-grid-tile *ngFor="let item of restaurantDetail.items">
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title>{{ item.name }}</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                    <img mat-card-lg-image src="{{ item.imageUrl }}"/>
-                    <br />
-                    <span>Rs. {{ item.price }}</span>
-                </mat-card-content>
-                <mat-card-actions>
-                    <button (click)="onClickMinus(item.itemId)" mat-mini-fab color="accent">
-                        -
-                    </button>
-                    <span> In Cart: {{ getQuantity(item.itemId) }} </span>
-                    <button (click)="onClickPlus(item.itemId, item.name, item.price, restaurantDetail.restaurantName)" mat-mini-fab color="accent">
-                        +
-                    </button>
-                </mat-card-actions>
-            </mat-card>
-        </mat-grid-tile>
-    </mat-grid-list>
-</div> -->
-
-
 <div *ngIf="restaurantDetail != undefined">
     <h1 class="text-center font-semibold text-2xl mt-3">
         {{ restaurantDetail.restaurantName }}
