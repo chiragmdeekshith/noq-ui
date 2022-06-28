@@ -49,12 +49,12 @@
 
     <div class="w-full mt-7">
         <ng-container *ngIf="calculateTotalPrice() as price">
-            <span class="text-md flex items-center justify-center">Restaurant Total -
+            <span *ngIf="price.total != 0" class="text-md flex items-center justify-center">Restaurant Total -
                 <span class=" ml-2 text-blue-500 flex items-center justify-center font-semibold">
                     Rs. {{ price.total }}
                 </span>
             </span>
-            <span class="text-md flex items-center justify-center mt-1">Commission -
+            <span *ngIf="price.commission != 0" class="text-md flex items-center justify-center mt-1">Commission -
                 <span class=" ml-2 text-blue-500 flex items-center justify-center font-semibold">
                     Rs. {{ price.commission }}
                 </span>
