@@ -58,12 +58,28 @@ export class CartComponent implements OnInit {
     }
   }
 
-  public calculateTotalPrice(): number {
+  public calculateTotalPrice(): {
+    total: number,
+    commission: number,
+  } {
     let total: number = 0;
     for (let cartItem of this.cartItems) {
       total += cartItem.price * cartItem.quantity;
     }
-    return total;
+    let commission: number = 0;
+    if (this.restaurants.size == 1) {
+      commission = 60;
+    }
+    else if (this.restaurants.size > 1 && this.restaurants.size < 5) {
+      commission = 80;
+    }
+    else if (this.restaurants.size >= 5 ) {
+      commission = 100;
+    }
+    return {
+      total: total,
+      commission: commission,
+    };
   }
 
   public onClickPlus(itemId: number) {
